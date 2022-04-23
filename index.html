@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <style>
+            body {margin: 0; padding: 0; width: 200px; height: 200px; overflow: hidden; background: black;}
+            #main {margin: 10px; width: 180px; height: 180px; border: 1px solid white; border-radius: 10px; color: white; background: black;}
+            #time {font-family: Arial, Helvetica, sans-serif; margin: 0 auto; font-size: 60px; text-align: center; margin-top: 20px;}
+            #weather {font-family: Arial, Helvetica, sans-serif; margin: 0 auto; font-size: 20px; text-align: center; margin-top: 10px;}
+            #date {font-family: Arial, Helvetica, sans-serif; margin: 0 auto; font-size: 20px; text-align: center; margin-top: 10px;}
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <div id="weather">no weather</div>
+            <div id="time">N:A</div>
+            <div id="date">not available</div>
+        </div>
+        <script>
+            let date = new Date()
+            document.getElementById('time').innerHTML = date.getHours() + ":" + date.getMinutes()
+            document.getElementById('date').innerHTML = date.getDay() + ". " + date.getMonth() + ". " + date.getFullYear()
+            
+            let url = "https://api.openweathermap.org/data/2.5/weather?q=Prague&units=metric&lang=cz&appid=f058fe1cad2afe8e2ddc5d063a64cecb"
+            
+            httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    data = JSON.parse(this.responseText)
+                    console.log(data)
+                    document.getElementById("weather").innerHTML = data.weather[0].description + " " + Math.floor(data.main.temp) + "℃"
+                }
+            };
+            httpRequest.open("GET", url, false);
+            httpRequest.send();
+        </script>        
+    </body>
+</html>
+
