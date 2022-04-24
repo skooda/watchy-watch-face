@@ -1,9 +1,9 @@
 e<html>
     <head>
         <meta charset="UTF-8">
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-            body {font-family: 'Righteous', cursive; margin: 0; padding: 0; width: 200px; height: 200px; overflow: hidden; background: black;}
+        <style>            
+            @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
+            body {font-family: 'Rajdhani', sans-serif; margin: 0; padding: 0; width: 200px; height: 200px; overflow: hidden; background: black;}
             #main {margin: 10px; width: 180px; height: 180px; border: 1px solid white; border-radius: 10px; color: white; background: black;}
             #time {margin: 0 auto; font-size: 60px; text-align: center; margin-top: 20px;}
             #weather {margin: 0 auto; font-size: 20px; text-align: center; margin-top: 10px;}
@@ -31,7 +31,8 @@ e<html>
 
             let date = changeTimezone(new Date(), "Europe/Prague")
             document.getElementById('time').innerHTML = date.getHours() + ":" + date.getMinutes()
-            document.getElementById('date').innerHTML = date.getDate() + ". " + (date.getMonth() + 1) + ". " + date.getFullYear()
+            document.getElementById('date').innerHTML = date.getDate() + ". " + (
+            date.getMonth() + 1) + ". " + date.getFullYear()
             
             let url = "https://api.openweathermap.org/data/2.5/weather?q=Prague&units=metric&lang=cz&appid=f058fe1cad2afe8e2ddc5d063a64cecb"
             
