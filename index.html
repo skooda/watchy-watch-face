@@ -5,9 +5,10 @@
             @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
             body {font-family: 'Rajdhani', sans-serif; margin: 0; padding: 0; width: 200px; height: 200px; overflow: hidden; background: black;}
             #main {margin: 0; width: 200px; height: 200px; color: white; background: black;}
-            #time {margin: 0 auto; font-size: 60px; text-align: center; margin-top: 20px;}
-            #weather {margin: 0 auto; font-size: 20px; text-align: center; margin-top: 10px;}
-            #date {margin: 0 auto; font-size: 20px; text-align: center; margin-top: 10px;}
+            #time {margin: 0 auto; font-size: 60px; text-align: center; margin-top: 60px}
+            #date {margin: 0 auto; font-size: 20px; text-align: center;}
+            #weathericon {width: 40px; height: 40px; filter: invert(100%); position: absolute; top: 5px; left: 10px;}
+            #temperature {margin: 0 auto; font-size: 20px; text-align: center; position: absolute; top: 40px; left: 10px; display: block; width: 40px; text-align: center;}
         </style>
     </head>
     <body>
@@ -41,7 +42,7 @@
                 if (this.readyState == 4 && this.status == 200) {
                     data = JSON.parse(this.responseText)
                     console.log(data)
-                    document.getElementById("weather").innerHTML = data.weather[0].description + " " + Math.floor(data.main.temp) + "°C"
+                    document.getElementById("weather").innerHTML = "<img id=\"weathericon\" src=\"img/weather/" + data.weather[0].icon + ".png\" /> <div id=\"temperature\">" + Math.floor(data.main.temp) + "°C</div>"
                 }
             };
             httpRequest.open("GET", url, false);
