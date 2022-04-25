@@ -41,7 +41,7 @@
                 if (this.readyState == 4 && this.status == 200) {
                     data = JSON.parse(this.responseText)
                     console.log(data)
-                    document.getElementById("weather").innerHTML = data.weather[0].description + " " + Math.floor(data.main.temp) + "℃"
+                    document.getElementById("weather").innerHTML = data.weather[0].description + " " + Math.floor(data.main.temp) + "°C"
                 }
             };
             httpRequest.open("GET", url, false);
