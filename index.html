@@ -9,13 +9,20 @@
             #date {margin: 0 auto; font-size: 20px; text-align: center;}
             #weathericon {width: 40px; height: 40px; filter: invert(100%); position: absolute; top: 5px; left: 10px;}
             #temperature {margin: 0 auto; font-size: 20px; text-align: center; position: absolute; top: 40px; left: 10px; display: block; width: 40px; text-align: center;}
+            #joke {text-align: center; font-size: 10px; width: 130px; position: absolute; top: 5px; left: 60px}
+            #joke-punch {margin-top: 5px}
         </style>
     </head>
     <body>
         <div id="main">
             <div id="weather">no weather</div>
             <div id="time">N:A</div>
-            ahoj<div id="date">not available</div>
+            <div id="date">not available</div>
+            <div id="joke">
+                <div id="joke-setup">Joke not available at the moment</div>
+                ...
+                <div id="joke-punch">because it is out of office</div>
+            </div>
         </div>
         <script>
             function changeTimezone(date, ianatz) {
@@ -35,6 +42,7 @@
             document.getElementById('date').innerHTML = date.getDate() + ". " + (
             date.getMonth() + 1) + ". " + date.getFullYear()
             
+            // weather
             let url = "https://api.openweathermap.org/data/2.5/weather?q=Prague&units=metric&lang=cz&appid=f058fe1cad2afe8e2ddc5d063a64cecb"
             
             httpRequest = new XMLHttpRequest();
@@ -43,6 +51,20 @@
                     data = JSON.parse(this.responseText)
                     console.log(data)
                     document.getElementById("weather").innerHTML = "<img id=\"weathericon\" src=\"img/weather/" + data.weather[0].icon + ".png\" /> <div id=\"temperature\">" + Math.floor(data.main.temp) + "°C</div>"
+                }
+            };
+            httpRequest.open("GET", url, false);
+            httpRequest.send();
+
+            // joke
+            url = "https://official-joke-api.appspot.com/random_joke"
+
+            httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    data = JSON.parse(this.responseText)
+                    document.getElementById("joke-setup").innerHTML = data.setup
+                    document.getElementById("joke-punch").innerHTML = data.punchline
                 }
             };
             httpRequest.open("GET", url, false);
